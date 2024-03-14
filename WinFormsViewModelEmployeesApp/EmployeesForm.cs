@@ -43,6 +43,26 @@ namespace WinFormsViewModelEmployeesApp
                 DataContext,
                 "AddCommand",
                 true));
+
+            btnRemove.DataBindings.Add(
+                new("Command",
+                DataContext,
+                "RemoveCommand",
+                true));
+
+            btnRemove.DataBindings.Add(
+                new("CommandParameter",
+                lstBoxEmployees,
+                "SelectedValue",
+                true,
+                DataSourceUpdateMode.OnPropertyChanged));
+
+            lstBoxEmployees.DataBindings.Add(
+                new("SelectedIndex",
+                DataContext,
+                "SelectedIndex",
+                true,
+                DataSourceUpdateMode.OnPropertyChanged));
         }
     }
 }

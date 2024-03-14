@@ -30,9 +30,10 @@
         {
             lstBoxEmployees = new ListBox();
             grpEmployee = new GroupBox();
-            txtName = new TextBox();
-            txtAge = new NumericUpDown();
             btnAdd = new Button();
+            txtAge = new NumericUpDown();
+            txtName = new TextBox();
+            btnRemove = new Button();
             grpEmployee.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)txtAge).BeginInit();
             SuspendLayout();
@@ -49,6 +50,7 @@
             // 
             // grpEmployee
             // 
+            grpEmployee.Controls.Add(btnRemove);
             grpEmployee.Controls.Add(btnAdd);
             grpEmployee.Controls.Add(txtAge);
             grpEmployee.Controls.Add(txtName);
@@ -60,20 +62,6 @@
             grpEmployee.TabStop = false;
             grpEmployee.Text = "Employee";
             // 
-            // txtName
-            // 
-            txtName.Location = new Point(26, 54);
-            txtName.Name = "txtName";
-            txtName.Size = new Size(362, 36);
-            txtName.TabIndex = 0;
-            // 
-            // txtAge
-            // 
-            txtAge.Location = new Point(26, 111);
-            txtAge.Name = "txtAge";
-            txtAge.Size = new Size(362, 36);
-            txtAge.TabIndex = 1;
-            // 
             // btnAdd
             // 
             btnAdd.Location = new Point(26, 173);
@@ -82,6 +70,29 @@
             btnAdd.TabIndex = 2;
             btnAdd.Text = "Add Employee";
             btnAdd.UseVisualStyleBackColor = true;
+            // 
+            // txtAge
+            // 
+            txtAge.Location = new Point(26, 111);
+            txtAge.Name = "txtAge";
+            txtAge.Size = new Size(362, 36);
+            txtAge.TabIndex = 1;
+            // 
+            // txtName
+            // 
+            txtName.Location = new Point(26, 54);
+            txtName.Name = "txtName";
+            txtName.Size = new Size(362, 36);
+            txtName.TabIndex = 0;
+            // 
+            // btnRemove
+            // 
+            btnRemove.Location = new Point(26, 241);
+            btnRemove.Name = "btnRemove";
+            btnRemove.Size = new Size(362, 49);
+            btnRemove.TabIndex = 2;
+            btnRemove.Text = "Remove Employee";
+            btnRemove.UseVisualStyleBackColor = true;
             // 
             // EmployeesForm
             // 
@@ -105,5 +116,6 @@
         private Button btnAdd;
         private NumericUpDown txtAge;
         private TextBox txtName;
+        private Button btnRemove;
     }
 }

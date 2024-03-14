@@ -44,14 +44,18 @@ namespace WinFormsViewModelEmployeesApp
             }
         }
 
-        // selected employee
-        //public Employee SelectedEmployee 
-        //{
-        //    get => Employees.FirstOrDefault(e => e.Id == SelectedId);
-        //}
-        
-        // selected id
-        //public int SelectedId { set; get; }
+        // selected index
+        int selectedIndex;
+
+        public int SelectedIndex
+        {
+            get => selectedIndex;
+            set
+            {
+                selectedIndex = value;
+                OnPropertyChanged();
+            }
+        }
 
         // employees full list
         public BindingList<Employee>? Employees { get; set; }
@@ -65,20 +69,45 @@ namespace WinFormsViewModelEmployeesApp
                 new(){ Id = ++id, Name = "Jimmy", Age = 34 },
             };
 
-            //SelectedId = 1;
+            SelectedIndex = 0;
 
             AddCommand = new AppCommand(_ =>
             {
-                Employees.Add(
-                    new Employee() { Id = ++id, Name = this.Name, Age = this.Age }
-                    );
-                this.Name = "";
-                this.Age = 0;
+                if(this.Name.Trim().Length > 0)
+                {
+                    Employees.Add
+                    (new Employee() { Id = ++id, 
+                                     Name = this.Name, 
+                                     Age = this.Age });
+                    this.Name = "";
+                    this.Age = 0;
+                }
+                
             });
+
+            RemoveCommand = new AppCommand(
+            obj =>
+            {
+                if(obj is int id)
+                {
+                    var employee = Employees.FirstOrDefault(e => e.Id == id);
+                    if (employee is not null)
+                    {
+                        int position = SelectedIndex;
+                        Employees.Remove(employee);
+                        if(position >= Employees.Count) 
+                            position = Employees.Count - 1;
+                        SelectedIndex = position;
+                    }
+                        
+                }
+            },
+            _ => Employees.Count > 0);
         }
 
         // command add employee
         public ICommand AddCommand { get; set; }
+        public ICommand RemoveCommand { set; get; }
 
         public event PropertyChangedEventHandler? PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string propertyName = "")

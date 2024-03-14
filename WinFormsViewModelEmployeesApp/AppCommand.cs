@@ -12,13 +12,21 @@ namespace WinFormsViewModelEmployeesApp
         public event EventHandler? CanExecuteChanged;
 
         Action<object?> commandAction;
+        Predicate<object?>? predicate;
 
-        public AppCommand(Action<object?> commandAction)
+        public AppCommand(Action<object?> commandAction, Predicate<object?>? predicate = null)
         {
             this.commandAction = commandAction;
+            this.predicate = predicate;
         }
 
-        public bool CanExecute(object? parameter) => true;
+        public bool CanExecute(object? parameter)
+        {
+            if (predicate != null)
+                return predicate.Invoke(parameter);
+            else
+                return true;
+        }
 
         public void Execute(object? parameter) => commandAction.Invoke(parameter);
     }
